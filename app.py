@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-from spotify import get_token
+from api import get_token
 import sqlite3
 import requests
 
@@ -9,7 +9,7 @@ userid = 1
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'feeltherythm'
 
-connection = sqlite3.connect("userdatabase.db", check_same_thread=False)
+connection = sqlite3.connect("user.db", check_same_thread=False)
 cursor = connection.cursor()
 
 

@@ -6,13 +6,12 @@ import os
 
 load_dotenv()
 
-client_Id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
-print(client_Id, client_secret)
-
+client_Id = os.getenv("CLIENT_ID")
 
 def get_token():
-    auth_string = client_Id + ":" + client_secret
+    print(client_Id, client_secret)
+    auth_string =   f"{client_Id}:{client_secret}"
     auth_bytes = auth_string.encode("utf-8")
     auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
 
