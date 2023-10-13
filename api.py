@@ -38,6 +38,7 @@ def get_auth_header(token):
     return {"Authorization": "Bearer " + token}
 
 
+
 def search_for_artist(tokens, artist_name):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(tokens)
@@ -45,13 +46,49 @@ def search_for_artist(tokens, artist_name):
 
     query_url = url + query
     request = get(query_url, headers=headers)
-    json_result = json.loads(request.content)
 
-    artist_data = json_result['artists']['items']
+    if request.status_code == 200:
+        json_result = json.loads(request.content)
+        artist_data = json_result['artists']['items']
+
+        if len(artist_data) == 0:
+            return f"{request.status_code} for the get_artist_id function"
+        else:
+            return artist_data[0]['id']
+    else:
+        return f"{request.status_code} for the get_artist_id function"
+
+
+def get_artist_song(tokens, artist_id):
+    url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?market=US"
+    headers = get_auth_header(tokens)
+    request = get(url, headers=headers)
+
+    if request.status_code == 200:
+        json_result = json.loads(request.content)
+        artist_tracks = json_result["tracks"]
+
+        return artist_tracks
+    
+    else:
+        return f"{request.status_code} for the get_artist_song function"
+    
+
+
+    
+
+
+
+
      
-    return artist_data 
 
 
 tokens = get_token()
-artist = search_for_artist(tokens, "BTS")
-print(artist)
+artist_data = search_for_artist(tokens, "davido")
+artist_id = artist_data
+print(artist_id)
+tracks = get_artist_song(tokens, artist_id)
+print(tracks)
+
+with open("dataset.json", "w") as json_file:
+    json.dump(tracks, json_file)

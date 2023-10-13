@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect
-from api import get_token
+import api
 import sqlite3
 import requests
 
@@ -87,7 +87,14 @@ def signup():
 @app.route('/', methods= ['GET', 'POST'])
 @app.route('/home', methods= ['GET', 'POST'])
 def home():
+    if request.method == "POST":
+        artist = request.form['']
+
+    token = api.get_token()
+    artist_id = api.search_for_artist(token, artist)
+    artist_track = api.get_artist_song(token, artist_id)
     return render_template('home.html')
+
 
 if __name__ == ('__main__'):
     app.run(debug=True)
