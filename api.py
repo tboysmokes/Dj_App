@@ -80,8 +80,8 @@ def get_songs(token):
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
     params = { 
-        "q": "genre:rock",
-        "type": "track",
+        "q": "",
+        "type": "",
         "limit": 10
     }
 
@@ -123,31 +123,6 @@ def data_function_artisttracks():
     check_json_file(tracks)
 
     return tracks
-
-
-
-# this function create the 
-def create_playlis(token):
-    playlistname = ""
-    playlist_description = ""
-
-    url = "https://api.spotify.com/v1/me/playlists"
-
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
-    }
-
-    params = {
-        "name": playlistname,
-        "description": playlist_description,
-        "public": True
-    }
-    
-    result = get(url, headers=headers, params=params)
-
-    if result.status_code == 201:
-        pass
 
 
 def data_function_searchmusic():

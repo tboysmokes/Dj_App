@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'home.css')}}">
-    <title> Welcome </title>
+    <title>Music Website</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Music Website</h1>
+    </header>
+    <div class="container">
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="Search for your favorite artist or album">
+            <button id="search-button">Search</button>
+        </div>
+        <div id="results">
+            <div id="artist-info">Artist Name: <span id="artist-name"></span></div>
+            <div id="album-info">Album Name: <span id="album-name"></span></div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("search-button").addEventListener("click", function () {
+            const searchTerm = document.getElementById("search-input").value;
+            // Replace this with your API call to fetch artist and album information.
+            // For simplicity, we'll just display a sample result.
+            const sampleArtist = "Sample Artist";
+            const sampleAlbum = "Sample Album";
+
+            document.getElementById("artist-name").textContent = sampleArtist;
+            document.getElementById("album-name").textContent = sampleAlbum;
+        });
+    </script>
 </body>
 </html>
